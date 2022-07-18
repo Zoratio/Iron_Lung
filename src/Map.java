@@ -10,28 +10,43 @@ TODO
  */
 
 public class Map {
-    static private Scanner myScanner = new Scanner(System.in);
-    double[] nextPos = new double[2];
+    final static private Scanner myScanner = new Scanner(System.in);
     double[] currentPos = new double[2];
     private int pictureCount = 0;
     final private Line[] walls = new Line[101];//[111];
     private boolean picSpot1Used, picSpot2Used, picSpot3Used, picSpot4Used = false;
-    private boolean alive = true;
 
     public Map(){
         currentPos[0] = 2;
         currentPos[1] = 4;
         LogWalls(walls);
-        System.out.print("DECADES AGO, EVERY KNOWN STAR AND HABITABLE PLANET VANISHED, LEAVING ONLY THOSE WHO WERE ON SPACE STATIONS OR STARSHIPS. THIS EVENT BECAME KNOWN AS THE " +
-                "QUIET RAPTURE. \n\nWITH SUPPLIES DWINDLING AND INFRASTRUCTURE CRUMBLING, SURVIVORS ARE SEARCHING FOR ANY TRACE OF NATURAL RESOURCES IN A UNIVERSE OF BARREN MOONS, LIT " +
-                "BY THE GHOSTLIGHT OF VANISHING STARS. \n\nONE SUCH MOON HOLDS A STRANGE ANOMALY: AN OCEAN OF BLOOD. YOU ARE A CONVICT, TASKED WITH EXPLORING THIS ANOMALY, IN A MAKESHIFT " +
-                "SUBMARINE NICKNAMED THE IRON LUNG. IT WAS NOT DESIGNED FOR THIS DEPTH, \nSO YOU WILL BE WELDED INSIDE AND THE FORWARD WINDOW WILL BE CLOSED. \n\nTHERE WAS NO TIME FOR " +
-                "TRAINING. \n\nIF SUCCESSFUL, YOU EARN YOUR FREEDOM.\n\n-PRESS ENTER TO BEGIN-");
+        System.out.print("""
+                DECADES AGO, EVERY KNOWN STAR AND HABITABLE PLANET VANISHED, LEAVING ONLY THOSE WHO WERE ON SPACE STATIONS OR STARSHIPS. THIS EVENT BECAME KNOWN AS THE QUIET RAPTURE.\s
+
+                WITH SUPPLIES DWINDLING AND INFRASTRUCTURE CRUMBLING, SURVIVORS ARE SEARCHING FOR ANY TRACE OF NATURAL RESOURCES IN A UNIVERSE OF BARREN MOONS, LIT BY THE GHOSTLIGHT OF VANISHING STARS.\s
+
+                ONE SUCH MOON HOLDS A STRANGE ANOMALY: AN OCEAN OF BLOOD. YOU ARE A CONVICT, TASKED WITH EXPLORING THIS ANOMALY, IN A MAKESHIFT SUBMARINE NICKNAMED THE IRON LUNG. IT WAS NOT DESIGNED FOR THIS DEPTH,\s
+                SO YOU WILL BE WELDED INSIDE AND THE FORWARD WINDOW WILL BE CLOSED.\s
+
+                THERE WAS NO TIME FOR TRAINING.\s
+
+                IF SUCCESSFUL, YOU EARN YOUR FREEDOM.
+
+                -PRESS ENTER TO BEGIN-""");
         myScanner.nextLine();
         IronLungGUI gameMap = new IronLungGUI("Map", "src/resources/IronLungMap.png",0, 0);
-        System.out.println("\n################################################################\n\nTWO WEEKS AGO, WE CONDUCTED AN EXPLORATION OF MOON AT-5 FOR THE FIRST TIME SINCE THE QUIET RAPTURE, LEADING TO THE DISCOVERY OF A FOURTH BLOOD OCEAN. A TRENCH " +
-                "BENEATH THE OCEAN'S SURFACE HAS SEVERAL POINTS OF INTEREST.\n\nYOUR TASK IS TO PHOTOGRAPH THESE POINTS OF INTEREST WITH THE SM13'S CAMERA. PHOTOS MUST BE TAKEN AT THE POINT OF " +
-                "INTEREST.\n\nSINCE YOU CAN'T NAVIGATE BY SIGHT, PAY ATTENTION TO YOUR COORDINATES AND CONSULT THE MAP. COMPLETE YOUR TASK AND RETURN TO THE SURFACE BEFORE OXYGEN RUNS OUT.\n\nGOOD LUCK.\n");
+        System.out.println("""
+
+                ################################################################
+
+                TWO WEEKS AGO, WE CONDUCTED AN EXPLORATION OF MOON AT-5 FOR THE FIRST TIME SINCE THE QUIET RAPTURE, LEADING TO THE DISCOVERY OF A FOURTH BLOOD OCEAN. A TRENCH BENEATH THE OCEAN'S SURFACE HAS SEVERAL POINTS OF INTEREST.
+
+                YOUR TASK IS TO PHOTOGRAPH THESE POINTS OF INTEREST WITH THE SM13'S CAMERA. PHOTOS MUST BE TAKEN AT THE POINT OF INTEREST.
+
+                SINCE YOU CAN'T NAVIGATE BY SIGHT, PAY ATTENTION TO YOUR COORDINATES AND CONSULT THE MAP. COMPLETE YOUR TASK AND RETURN TO THE SURFACE BEFORE OXYGEN RUNS OUT.
+
+                GOOD LUCK.
+                """);
         ListCommands();
         System.out.println("\nCOORDINATES: " + Arrays.toString(GetCurrentPos()));
         Commands();
@@ -45,38 +60,19 @@ public class Map {
         System.out.print("\nENTER COMMAND:");
         String command = myScanner.nextLine();
 
-        switch (command){
-            case "COMMANDS":
-                ListCommands();
-                break;
-            case "MOVE":
-                Move();
-                break;
-            case "PICTURE":
-                Picture();
-                break;
-            case "COMPASS":
-                System.out.println("\n315  000  045\n270   *   090\n225  180  135");
-                break;
-            case "OXYGEN":
-                System.out.println("\n*FATAL ERROR: MALFUNCTION DETECTED*");
-                break;
-            case "HELP":
-                System.out.println("\n............");
-                break;
-            default:
-                System.out.println("\nUNKNOWN COMMAND: ENTER 'COMMANDS' FOR LIST.");
-                break;
+        switch (command) {
+            case "COMMANDS" -> ListCommands();
+            case "MOVE" -> Move();
+            case "PICTURE" -> Picture();
+            case "COMPASS" -> System.out.println("\n315  000  045\n270   *   090\n225  180  135");
+            case "OXYGEN" -> System.out.println("\n*FATAL ERROR: MALFUNCTION DETECTED*");
+            case "HELP" -> System.out.println("\n............");
+            default -> System.out.println("\nUNKNOWN COMMAND: ENTER 'COMMANDS' FOR LIST.");
         }
-
-
         System.out.print("\n################################################################\n");
-
         System.out.println("\nCOORDINATES: " + Arrays.toString(GetCurrentPos()));
 
-        if (alive){
-            Commands();
-        }
+        Commands();
     }
 
     private void Picture() {
@@ -122,7 +118,7 @@ public class Map {
     }
 
     private void PictureSwitch() {
-        System.out.println("Processing image...");
+        System.out.println("\nProcessing image...");
         try
         {
             // Delay for 4 seconds
@@ -148,13 +144,13 @@ public class Map {
             case 3:
                 pictureCount++;
                 IronLungGUI picture4 = new IronLungGUI("4", "src/resources/SM13Image4.png",1100, 30);
-                Eaten();
+                Die();
             default:
                 break;
         }
     }
 
-    private void Eaten() {
+    private void Die() {
         try
         {
             // Delay for 4 seconds
@@ -164,7 +160,7 @@ public class Map {
         {
             ex.printStackTrace();
         }
-        System.out.println("WARNING");
+        System.out.println("\nWARNING");
         try
         {
             // Delay for 4 seconds
@@ -240,7 +236,7 @@ public class Map {
         currentPos[0] = end_y;
         currentPos[1] = end_x;
 
-        System.out.println("\nRELOCATE INITIATED");
+        System.out.println("\nRELOCATE INITIATED...");
         try
         {
             // Delay for 2 seconds
@@ -250,7 +246,7 @@ public class Map {
         {
             ex.printStackTrace();
         }
-        System.out.println("SM13 NOW MOVING");
+        System.out.println("SM13 NOW MOVING...");
         try
         {
             // Delay for 5 seconds
@@ -261,8 +257,7 @@ public class Map {
             ex.printStackTrace();
         }
         if (crashed){
-            //have game fail
-            System.out.println("CRASHED");
+            Die();
         }
         else {
             System.out.println("RELOCATE COMPLETE");
@@ -280,16 +275,13 @@ public class Map {
             end[0] = end_y;
             end[1] = end_x;
         }
-    };
+    }
 
     // Given three collinear points p, q, r, the function checks if
     // point q lies on line segment 'pr'
     private boolean onSegment(double[] p, double[] q, double[] r)
     {
-        if (q[1] <= Math.max(p[1], r[1]) && q[1] >= Math.min(p[1], r[1]) && q[0] <= Math.max(p[0], r[0]) && q[0] >= Math.min(p[0], r[0]))
-            return true;
-
-        return false;
+        return q[1] <= Math.max(p[1], r[1]) && q[1] >= Math.min(p[1], r[1]) && q[0] <= Math.max(p[0], r[0]) && q[0] >= Math.min(p[0], r[0]);
     }
 
     // To find orientation of ordered triplet (p, q, r).
@@ -332,9 +324,7 @@ public class Map {
         if (o3 == 0 && onSegment(wall.start, submarine.start, wall.end)) return true;
 
         // p2, q2 and q1 are collinear and q1 lies on segment p2q2
-        if (o4 == 0 && onSegment(wall.start, submarine.end, wall.end)) return true;
-
-        return false; // Doesn't fall in any of the above cases
+        return o4 == 0 && onSegment(wall.start, submarine.end, wall.end);// Doesn't fall in any of the above cases
     }
 
     private void LogWalls(Line[] walls){
