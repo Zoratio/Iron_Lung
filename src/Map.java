@@ -13,8 +13,10 @@ public class Map {
     static private Scanner myScanner = new Scanner(System.in);
     double[] nextPos = new double[2];
     double[] currentPos = new double[2];
-
+    private int pictureCount = 0;
     final private Line[] walls = new Line[101];//[111];
+    private boolean picSpot1Used, picSpot2Used, picSpot3Used, picSpot4Used = false;
+    private boolean alive = true;
 
     public Map(){
         currentPos[0] = 2;
@@ -26,11 +28,12 @@ public class Map {
                 "SUBMARINE NICKNAMED THE IRON LUNG. IT WAS NOT DESIGNED FOR THIS DEPTH, \nSO YOU WILL BE WELDED INSIDE AND THE FORWARD WINDOW WILL BE CLOSED. \n\nTHERE WAS NO TIME FOR " +
                 "TRAINING. \n\nIF SUCCESSFUL, YOU EARN YOUR FREEDOM.\n\n-PRESS ENTER TO BEGIN-");
         myScanner.nextLine();
-        IronLungGUI gameMap = new IronLungGUI();
+        IronLungGUI gameMap = new IronLungGUI("Map", "src/resources/IronLungMap.png",0, 0);
         System.out.println("\n################################################################\n\nTWO WEEKS AGO, WE CONDUCTED AN EXPLORATION OF MOON AT-5 FOR THE FIRST TIME SINCE THE QUIET RAPTURE, LEADING TO THE DISCOVERY OF A FOURTH BLOOD OCEAN. A TRENCH " +
                 "BENEATH THE OCEAN'S SURFACE HAS SEVERAL POINTS OF INTEREST.\n\nYOUR TASK IS TO PHOTOGRAPH THESE POINTS OF INTEREST WITH THE SM13'S CAMERA. PHOTOS MUST BE TAKEN AT THE POINT OF " +
                 "INTEREST.\n\nSINCE YOU CAN'T NAVIGATE BY SIGHT, PAY ATTENTION TO YOUR COORDINATES AND CONSULT THE MAP. COMPLETE YOUR TASK AND RETURN TO THE SURFACE BEFORE OXYGEN RUNS OUT.\n\nGOOD LUCK.\n");
         ListCommands();
+        System.out.println("\nCOORDINATES: " + Arrays.toString(GetCurrentPos()));
         Commands();
     }
 
@@ -49,6 +52,9 @@ public class Map {
             case "MOVE":
                 Move();
                 break;
+            case "PICTURE":
+                Picture();
+                break;
             case "COMPASS":
                 System.out.println("\n315  000  045\n270   *   090\n225  180  135");
                 break;
@@ -62,13 +68,151 @@ public class Map {
                 System.out.println("\nUNKNOWN COMMAND: ENTER 'COMMANDS' FOR LIST.");
                 break;
         }
+
+
         System.out.print("\n################################################################\n");
 
-        Commands();
+        System.out.println("\nCOORDINATES: " + Arrays.toString(GetCurrentPos()));
+
+        if (alive){
+            Commands();
+        }
     }
 
-    private double[] GetCurrentPos() {
-        return currentPos;
+    private void Picture() {
+        if (Math.round(currentPos[0]) == 5 && Math.round(currentPos[1]) == 6){
+            if (!picSpot1Used){
+                picSpot1Used = true;
+                PictureSwitch();
+            }
+            else{
+                System.out.println("Image already acquired. Visit a new location.");
+            }
+        }
+        else if (Math.round(currentPos[0]) == 4 && Math.round(currentPos[1]) == 17){
+            if (!picSpot2Used){
+                picSpot2Used = true;
+                PictureSwitch();
+            }
+            else{
+                System.out.println("Image already acquired. Visit a new location.");
+            }
+        }
+        else if (Math.round(currentPos[0]) == 15 && Math.round(currentPos[1]) == 7){
+            if (!picSpot3Used){
+                picSpot3Used = true;
+                PictureSwitch();
+            }
+            else{
+                System.out.println("Image already acquired. Visit a new location.");
+            }
+        }
+        else if (Math.round(currentPos[0]) == 14 && Math.round(currentPos[1]) == 17){
+            if (!picSpot4Used){
+                picSpot4Used = true;
+                PictureSwitch();
+            }
+            else{
+                System.out.println("Image already acquired. Visit a new location.");
+            }
+        }
+        else{
+            System.out.println("\nSM13 camera is not within 0.5 range of a specified location.");
+        }
+    }
+
+    private void PictureSwitch() {
+        System.out.println("Processing image...");
+        try
+        {
+            // Delay for 4 seconds
+            Thread.sleep(4000);
+        }
+        catch(InterruptedException ex)
+        {
+            ex.printStackTrace();
+        }
+        switch (pictureCount){
+            case 0:
+                pictureCount++;
+                IronLungGUI picture1 = new IronLungGUI("1", "src/resources/SM13Image1.png",500, 0);
+                break;
+            case 1:
+                pictureCount++;
+                IronLungGUI picture2 = new IronLungGUI("2", "src/resources/SM13Image2.png",700, 10);
+                break;
+            case 2:
+                pictureCount++;
+                IronLungGUI picture3 = new IronLungGUI("3", "src/resources/SM13Image3.png",900, 20);
+                break;
+            case 3:
+                pictureCount++;
+                IronLungGUI picture4 = new IronLungGUI("4", "src/resources/SM13Image4.png",1100, 30);
+                Eaten();
+            default:
+                break;
+        }
+    }
+
+    private void Eaten() {
+        try
+        {
+            // Delay for 4 seconds
+            Thread.sleep(4000);
+        }
+        catch(InterruptedException ex)
+        {
+            ex.printStackTrace();
+        }
+        System.out.println("WARNING");
+        try
+        {
+            // Delay for 4 seconds
+            Thread.sleep(1000);
+        }
+        catch(InterruptedException ex)
+        {
+            ex.printStackTrace();
+        }
+        System.out.println("COLLISION DETECTED");
+        try
+        {
+            // Delay for 4 seconds
+            Thread.sleep(1000);
+        }
+        catch(InterruptedException ex)
+        {
+            ex.printStackTrace();
+        }
+        System.out.println("CRITICAL DAMAGE SUSTAINED");
+        try
+        {
+            // Delay for 4 seconds
+            Thread.sleep(1000);
+        }
+        catch(InterruptedException ex)
+        {
+            ex.printStackTrace();
+        }
+        System.out.println("LEAK DETECTED");
+        try
+        {
+            // Delay for 4 seconds
+            Thread.sleep(1000);
+        }
+        catch(InterruptedException ex)
+        {
+            ex.printStackTrace();
+        }
+        System.out.println("ERROR");
+        System.exit(0);
+    }
+
+    private String[] GetCurrentPos() {
+        String[] reversed = new String[2];
+        reversed[0] = "x" + Math.round(currentPos[1] * 10000.0) / 10000.0;
+        reversed[1] = "y" + Math.round(currentPos[0] * 10000.0) / 10000.0;
+        return reversed;
     }
 
     private void Move() {
@@ -120,10 +264,9 @@ public class Map {
             //have game fail
             System.out.println("CRASHED");
         }
-
-        System.out.println("RELOCATE COMPLETE");
-
-        System.out.println("COORDINATES: " + Arrays.toString(GetCurrentPos()));
+        else {
+            System.out.println("RELOCATE COMPLETE");
+        }
     }
 
     static class Line
