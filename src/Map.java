@@ -13,7 +13,7 @@ public class Map {
     final static private Scanner myScanner = new Scanner(System.in);
     double[] currentPos = new double[2];
     private int pictureCount = 0;
-    final private Line[] walls = new Line[101];//[111];
+    final private Line[] walls = new Line[101];
     private boolean picSpot1Used, picSpot2Used, picSpot3Used, picSpot4Used = false;
 
     public Map(){
@@ -213,9 +213,27 @@ public class Map {
 
     private void Move() {
         System.out.print("\nANGLE:");
-        double angle_input = Double.parseDouble((myScanner.nextLine()));
+        while (!myScanner.hasNextDouble()) {
+            System.out.print("\nINVALID INPUT");
+            System.out.print("\nANGLE:");
+            myScanner.nextLine();
+        }
+        double angle_input = myScanner.nextDouble();
+        myScanner.nextLine();
+
         System.out.print("\nDISTANCE:");
-        double distance_input = Double.parseDouble((myScanner.nextLine()));
+        while (!myScanner.hasNextDouble()) {
+            System.out.print("\nINVALID INPUT");
+            System.out.print("\nDISTANCE:");
+            myScanner.nextLine();
+        }
+        double distance_input = myScanner.nextDouble();
+        myScanner.nextLine();
+
+        if (distance_input == 0){
+            return;
+        }
+
 
         double start_x = currentPos[1];
         double start_y = currentPos[0];
