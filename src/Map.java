@@ -2,14 +2,9 @@ import java.util.Scanner;
 import java.util.Arrays;
 
 public class Map {
-    final static private Scanner myScanner = new Scanner(System.in);
-    private Move move = new Move();
-    private Commands commands = new Commands(this, move);
     final private Move.Line[] walls = new Move.Line[101];
-    public boolean[] picSpots = new boolean[4];
 
-    public Map(){
-        Arrays.fill(picSpots, Boolean.FALSE);
+    public Map(Scanner myScanner){
         logWalls(walls);
         System.out.print("""
                 DECADES AGO, EVERY KNOWN STAR AND HABITABLE PLANET VANISHED, LEAVING ONLY THOSE WHO WERE ON SPACE STATIONS OR STARSHIPS. THIS EVENT BECAME KNOWN AS THE QUIET RAPTURE.\s
@@ -38,16 +33,11 @@ public class Map {
 
                 GOOD LUCK.
                 """);
-        commands.listCommands();
-        System.out.println("\nCOORDINATES: " + Arrays.toString(move.getCurrentPos()));
-        commands.commands(myScanner);
     }
-
 
     public Move.Line[] getWalls(){
         return walls;
     }
-
 
     private void logWalls(Move.Line[] walls){
         walls[0] = new Move.Line(2,2,3,2);

@@ -1,66 +1,11 @@
 import java.util.Scanner;
 
 public class Move {
-
     double[] currentPos = new double[2];
 
     public Move(){
         currentPos[0] = 2;
         currentPos[1] = 4;
-    }
-
-    public static void die() {
-        try
-        {
-            // Delay for 4 seconds
-            Thread.sleep(4000);
-        }
-        catch(InterruptedException ex)
-        {
-            ex.printStackTrace();
-        }
-        System.out.println("\nWARNING");
-        try
-        {
-            // Delay for 4 seconds
-            Thread.sleep(1000);
-        }
-        catch(InterruptedException ex)
-        {
-            ex.printStackTrace();
-        }
-        System.out.println("COLLISION DETECTED");
-        try
-        {
-            // Delay for 4 seconds
-            Thread.sleep(1000);
-        }
-        catch(InterruptedException ex)
-        {
-            ex.printStackTrace();
-        }
-        System.out.println("CRITICAL DAMAGE SUSTAINED");
-        try
-        {
-            // Delay for 4 seconds
-            Thread.sleep(1000);
-        }
-        catch(InterruptedException ex)
-        {
-            ex.printStackTrace();
-        }
-        System.out.println("LEAK DETECTED");
-        try
-        {
-            // Delay for 4 seconds
-            Thread.sleep(1000);
-        }
-        catch(InterruptedException ex)
-        {
-            ex.printStackTrace();
-        }
-        System.out.println("ERROR");
-        System.exit(0);
     }
 
     public String[] getCurrentPos() {
@@ -71,6 +16,7 @@ public class Move {
     }
 
     public void move(Scanner myScanner, Map map) {
+        System.out.println("\n315  000  045\n270   *   090\n225  180  135");
         System.out.print("\nANGLE:");
         while (!myScanner.hasNextDouble()) {
             System.out.print("\nINVALID INPUT");
@@ -89,10 +35,10 @@ public class Move {
         double distance_input = myScanner.nextDouble();
         myScanner.nextLine();
 
+
         if (distance_input == 0){
             return;
         }
-
 
         double start_x = currentPos[1];
         double start_y = currentPos[0];
@@ -113,6 +59,10 @@ public class Move {
         currentPos[0] = end_y;
         currentPos[1] = end_x;
 
+        moving(crashed);
+    }
+
+    private void moving(boolean crashed) {
         System.out.println("\nRELOCATE INITIATED...");
         try
         {
@@ -134,7 +84,7 @@ public class Move {
             ex.printStackTrace();
         }
         if (crashed){
-            //die();
+            die();
         }
         else {
             System.out.println("RELOCATE COMPLETE");
@@ -202,5 +152,49 @@ public class Move {
 
         // p2, q2 and q1 are collinear and q1 lies on segment p2q2
         return o4 == 0 && onSegment(wall.start, submarine.end, wall.end);// Doesn't fall in any of the above cases
+    }
+
+    public static void die() {
+        System.out.println("\n*WARNING*");
+        try
+        {
+            // Delay for 1 seconds
+            Thread.sleep(1000);
+        }
+        catch(InterruptedException ex)
+        {
+            ex.printStackTrace();
+        }
+        System.out.println("*COLLISION*");
+        try
+        {
+            // Delay for 1 seconds
+            Thread.sleep(1000);
+        }
+        catch(InterruptedException ex)
+        {
+            ex.printStackTrace();
+        }
+        System.out.println("*CRITICAL DAMAGE SUSTAINED*");
+        try
+        {
+            // Delay for 1 seconds
+            Thread.sleep(1000);
+        }
+        catch(InterruptedException ex)
+        {
+            ex.printStackTrace();
+        }
+        System.out.println("*LEAK DETECTED*");
+        try
+        {
+            // Delay for 1 seconds
+            Thread.sleep(1000);
+        }
+        catch(InterruptedException ex)
+        {
+            ex.printStackTrace();
+        }
+        System.exit(0);
     }
 }

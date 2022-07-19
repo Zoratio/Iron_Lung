@@ -1,18 +1,22 @@
+import java.util.Arrays;
+
 public class Pictures {
     public int pictureCount;
+    public boolean[] picSpots = new boolean[4];
+
     public Pictures(){
         pictureCount = 0;
-
+        Arrays.fill(picSpots, Boolean.FALSE);
     }
 
-    public void picture(double[] currentPos, boolean[] picSpots) {
+    public void picture(double[] currentPos) {
         if (Math.round(currentPos[0]) == 5 && Math.round(currentPos[1]) == 6){
             if (!picSpots[0]){
                 picSpots[0] = true;
                 pictureSwitch();
             }
             else{
-                System.out.println("Image already acquired. Visit a new location.");
+                System.out.println("\nImage already acquired. Visit a new location.");
             }
         }
         else if (Math.round(currentPos[0]) == 4 && Math.round(currentPos[1]) == 17){
@@ -21,7 +25,7 @@ public class Pictures {
                 pictureSwitch();
             }
             else{
-                System.out.println("Image already acquired. Visit a new location.");
+                System.out.println("\nImage already acquired. Visit a new location.");
             }
         }
         else if (Math.round(currentPos[0]) == 15 && Math.round(currentPos[1]) == 7){
@@ -30,7 +34,7 @@ public class Pictures {
                 pictureSwitch();
             }
             else{
-                System.out.println("Image already acquired. Visit a new location.");
+                System.out.println("\nImage already acquired. Visit a new location.");
             }
         }
         else if (Math.round(currentPos[0]) == 14 && Math.round(currentPos[1]) == 17){
@@ -39,7 +43,7 @@ public class Pictures {
                 pictureSwitch();
             }
             else{
-                System.out.println("Image already acquired. Visit a new location.");
+                System.out.println("\nImage already acquired. Visit a new location.");
             }
         }
         else{
