@@ -47,7 +47,7 @@ public class Pictures {
             }
         }
         else{
-            System.out.println("\nSM13 CAMERA IS NOT WITHIN 0.5 RANGE OF A SPECIFIED LOCATION.");
+            System.out.println("\nSM13 CAMERA IS NOT WITHIN 0.5 RANGE OF A SPECIFIED LOCATION OF INTEREST.");
         }
     }
 
