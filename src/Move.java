@@ -2,6 +2,7 @@ import java.util.Scanner;
 
 public class Move {
     double[] currentPos = new double[2];
+    static int moveNo = 0;
 
     public Move(){
         currentPos[0] = 2;
@@ -16,6 +17,7 @@ public class Move {
     }
 
     public void move(Scanner myScanner, Map map) {
+        moveNo++;
         System.out.println("\n315  000  045\n270   *   090\n225  180  135");
         System.out.print("\nANGLE:");
         while (!myScanner.hasNextDouble()) {
@@ -195,6 +197,7 @@ public class Move {
         {
             ex.printStackTrace();
         }
+        System.out.println("\nNumber of moves made: " + moveNo);
         System.exit(0);
     }
 }
