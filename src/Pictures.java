@@ -16,7 +16,7 @@ public class Pictures {
                 pictureSwitch();
             }
             else{
-                System.out.println("\nImage already acquired. Visit a new location.");
+                System.out.println("\nIMAGE ALREADY ACQUIRED. VISIT A NEW LOCATION.");
             }
         }
         else if (Math.round(currentPos[0]) == 4 && Math.round(currentPos[1]) == 17){
@@ -25,7 +25,7 @@ public class Pictures {
                 pictureSwitch();
             }
             else{
-                System.out.println("\nImage already acquired. Visit a new location.");
+                System.out.println("\nIMAGE ALREADY ACQUIRED. VISIT A NEW LOCATION.");
             }
         }
         else if (Math.round(currentPos[0]) == 15 && Math.round(currentPos[1]) == 7){
@@ -34,7 +34,7 @@ public class Pictures {
                 pictureSwitch();
             }
             else{
-                System.out.println("\nImage already acquired. Visit a new location.");
+                System.out.println("\nIMAGE ALREADY ACQUIRED. VISIT A NEW LOCATION.");
             }
         }
         else if (Math.round(currentPos[0]) == 14 && Math.round(currentPos[1]) == 17){
@@ -43,16 +43,16 @@ public class Pictures {
                 pictureSwitch();
             }
             else{
-                System.out.println("\nImage already acquired. Visit a new location.");
+                System.out.println("\nIMAGE ALREADY ACQUIRED. VISIT A NEW LOCATION.");
             }
         }
         else{
-            System.out.println("\nSM13 camera is not within 0.5 range of a specified location.");
+            System.out.println("\nSM13 CAMERA IS NOT WITHIN 0.5 RANGE OF A SPECIFIED LOCATION.");
         }
     }
 
     private void pictureSwitch() {
-        System.out.println("\nProcessing image...");
+        System.out.println("\nPROCESSING IMAGE...");
         try
         {
             // Delay for 4 seconds
